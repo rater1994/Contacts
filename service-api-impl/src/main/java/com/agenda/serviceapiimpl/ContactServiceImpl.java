@@ -24,4 +24,28 @@ public class ContactServiceImpl implements ContactService {
         });
         return listContactDto;
     }
+
+    @Override
+    public ContactDto addNewContactDTO(ContactDto contactDto) {
+        Contact contact = new Contact();
+        contact.updateContactDto(contactDto);
+        return  contactRepository.save(contact).toContactDto();
+    }
+
+    @Override
+    public ContactDto getContactDTO(Long id) {
+        if(contactRepository.findById(id).isPresent()){
+            return contactRepository.findById(id).get().toContactDto();
+        }
+        return null;
+    }
+
+    @Override
+    public ContactDto editContactDTO(ContactDto contactDto, Long id) {
+        ContactDto dbContact = contactRepository.findById(id);
+        if(contactRepository.findById(id).isPresent()){
+
+        }
+    }
+
 }
