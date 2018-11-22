@@ -6,9 +6,11 @@ import com.agenda.model.repository.ContactRepository;
 import com.agenda.serviceapi.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ContactServiceImpl implements ContactService {
@@ -42,9 +44,18 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public ContactDto editContactDTO(ContactDto contactDto, Long id) {
-        ContactDto dbContact = contactRepository.findById(id);
-        if(contactRepository.findById(id).isPresent()){
+        Optional<Contact> dbContact = contactRepository.findById(id);
 
+        if (dbContact.isPresent()) {
+            Contact contact = dbContact.get();
+
+            contact.setFirstName(contactDto.getFirstNameDto());
+            contact.setLastName(contactDto.getLastNameDto());
+            contact.setNumberPhone(contactDto.getNumberPhoneDto());
+            return contactRepository.save(contact).toContactDto();
+
+        } else {
+            return null;
         }
     }
 
