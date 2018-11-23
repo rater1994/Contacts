@@ -4,10 +4,12 @@ import com.agenda.model.dto.AccountDto;
 import com.agenda.restapi.Contact.AccountController;
 import com.agenda.serviceapi.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.xml.ws.Response;
 import java.util.List;
 
 @RestController
@@ -37,8 +39,10 @@ public class AccountControllerImpl  implements AccountController {
     }
 
     @Override
-    public AccountDto deleteAccount(@RequestBody AccountDto accountDto, @PathVariable Long id) {
-        return accountService.deleteAccountDTO(accountDto,id);
+    public AccountDto deleteAccount(@PathVariable Long id) {
+     return accountService.deleteAccountDTO(id);
     }
+
+
 
 }

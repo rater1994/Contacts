@@ -1,14 +1,12 @@
 package com.agenda.serviceapiimpl;
 
 import com.agenda.model.dto.AccountDto;
-import com.agenda.model.dto.ContactDto;
 import com.agenda.model.entity.Account;
 import com.agenda.model.repository.AccountRepository;
 import com.agenda.serviceapi.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -34,24 +32,25 @@ public class AccountServiceImpl implements AccountService {
         return list;
     }
 
+
     @Override
     public AccountDto addAccountDTO(AccountDto accountDto) {
         Account account = new Account();
 
-        if(account.getRole() == "" ){
-            account.setRole("USER");
-            account.updateAccountDto(accountDto);
-            return accountRepository.save(account).toAccountDto();
-        }
+        account.updateAccountDto(accountDto);
 
-    return null;
+        System.out.println(accountDto.getRole());
+
+        return accountRepository.save(account).toAccountDto();
+
     }
+
 
     @Override
     public AccountDto editAccountDTO(AccountDto accountDto, Long id) {
         Optional<Account> dbAccount = accountRepository.findById(id);
 
-        if(dbAccount.isPresent()){
+        if (dbAccount.isPresent()) {
             Account account = dbAccount.get();
 
             System.out.println("Edit.........");
@@ -59,37 +58,28 @@ public class AccountServiceImpl implements AccountService {
             account.setUsername(accountDto.getUsername());
             account.setPassword(accountDto.getPassword());
             account.setRole(accountDto.getRole());
-            account.setDeleteFlag(accountDto.isDeleteFlag());
+            account.setDeleteFlag(accountDto.getDeleteFlag());
             return accountRepository.save(account).toAccountDto();
         }
         return null;
     }
 
 
-
     @Override
     public AccountDto findAccountDTO(Long id) {
         Optional<Account> byId = accountRepository.findById(id);
 
-        if (byId.isPresent()){
+        if (byId.isPresent()) {
             return accountRepository.findById(id).get().toAccountDto();
-        }else {
+        } else {
             return null;
         }
-
     }
 
     @Override
-    public AccountDto deleteAccountDTO(AccountDto accountDto, Long id) {
-        Optional<Account> editDbAccount = accountRepository.findById(id);
-
-        if(editDbAccount.isPresent()){
-            Account account = editDbAccount.get();
-            account.setDeleteFlag(true);
-            return accountRepository.save(account).toAccountDto();
-        }
-            return null;
+    public AccountDto deleteAccountDTO(Long id)  {
+        accountRepository.deleteById(id);
+        return null;
     }
-
 
 }

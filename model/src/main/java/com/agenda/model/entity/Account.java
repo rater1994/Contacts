@@ -2,19 +2,32 @@ package com.agenda.model.entity;
 
 
 import com.agenda.model.dto.AccountDto;
+import org.hibernate.annotations.ResultCheckStyle;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
+import java.util.logging.Logger;
+
+import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
+
 @Entity
+@SQLDelete(sql = "UPDATE users SET delete_flag = 'DELETED' WHERE id = ?", check = ResultCheckStyle.COUNT)
+@Where(clause = "delete_flag <> 'DELETED'")
 @Table(name="users")
 public class Account {
+
+    @Transient
+    Logger log = Logger.getLogger(this.getClass().getName());
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
     private Long id;
 
-    @Column(name = "Username")
+    @Column
     private String username;
 
     @Column(name = "Password")
@@ -23,16 +36,8 @@ public class Account {
     @Column(name = "Role")
     private String Role;
 
-    @Column(name = "Deleted")
-    private boolean deleteFlag;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @Column(name = "DeleteFlag")
+    private String deleteFlag;
 
     public String getUsername() {
         return username;
@@ -58,13 +63,38 @@ public class Account {
         Role = role;
     }
 
-    public boolean getDeleteFlag() {
+    public String getDeleteFlag() {
         return deleteFlag;
     }
 
-    public void setDeleteFlag(boolean deleteFlag) {
+    public void setDeleteFlag(String deleteFlag) {
         this.deleteFlag = deleteFlag;
     }
+
+    //    @Column
+//    @Enumerated(EnumType.STRING)
+//    private AccountState state;
+
+
+
+//    @PreRemove
+//    public void deleteUser(){
+//        log.info("Set state to DELETED");
+//        this.state = AccountState.DELETED;
+//    }
+
+
+//
+//    public AccountState getState() {
+//        return state;
+//    }
+//
+//    public void setState(AccountState state) {
+//        this.state = state;
+//    }
+
+
+
 
     public AccountDto toAccountDto(){
         AccountDto accountDto = new AccountDto();
@@ -74,7 +104,6 @@ public class Account {
         accountDto.setPassword(this.password);
         accountDto.setRole(this.Role);
         accountDto.setDeleteFlag(this.deleteFlag);
-
         return accountDto;
     }
 
@@ -83,6 +112,6 @@ public class Account {
         this.username = accountDto.getUsername();
         this.password = accountDto.getPassword();
         this.Role  = accountDto.getRole();
-        this.deleteFlag = accountDto.isDeleteFlag();
+        this.deleteFlag = accountDto.getDeleteFlag();
     }
 }

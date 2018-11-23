@@ -1,6 +1,8 @@
 package com.agenda.restapi.Contact;
 
 import com.agenda.model.dto.AccountDto;
+import com.agenda.model.entity.Account;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +23,8 @@ public interface AccountController {
     @GetMapping("/find/{id}")
     AccountDto findAccount(@PathVariable Long id);
 
-    @PutMapping("/delete/{id}")
-    AccountDto deleteAccount(@RequestBody AccountDto accountDto,@PathVariable Long id);
-
+    @DeleteMapping("/delete/{id}")
+    AccountDto deleteAccount(@PathVariable Long id);
 }
+
+

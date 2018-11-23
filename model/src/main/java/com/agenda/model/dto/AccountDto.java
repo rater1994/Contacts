@@ -6,16 +6,7 @@ public class AccountDto {
     private String username;
     private String password;
     private String Role;
-
-    public boolean isDeleteFlag() {
-        return deleteFlag;
-    }
-
-    public void setDeleteFlag(boolean deleteFlag) {
-        this.deleteFlag = deleteFlag;
-    }
-
-    private boolean deleteFlag;
+    private String deleteFlag;
 
     public Long getId() {
         return id;
@@ -49,5 +40,11 @@ public class AccountDto {
         Role = role;
     }
 
+    public String getDeleteFlag() {
+        return deleteFlag;
+    }
 
+    public void setDeleteFlag(String deleteFlag) {
+        this.deleteFlag = deleteFlag;
+    }
 }
