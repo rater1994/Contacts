@@ -35,7 +35,6 @@ public class JwtAuthenticationTokenFilter extends AbstractAuthenticationProcessi
         return getAuthenticationManager().authenticate(token);
     }
 
-
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         super.successfulAuthentication(request, response, chain, authResult);
