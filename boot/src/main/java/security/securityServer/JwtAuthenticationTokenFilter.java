@@ -14,17 +14,17 @@ import java.io.IOException;
 public class JwtAuthenticationTokenFilter extends AbstractAuthenticationProcessingFilter {
 
     public JwtAuthenticationTokenFilter() {
-        super("/rest/**");
+        super("/account/**");
     }
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws AuthenticationException, IOException, ServletException {
 
-        String bearer = "Token";
+        String bearear = "Word";  // ------------------
 
         String header = httpServletRequest.getHeader("Authorization");
 
-        if(header == null || !header.startsWith(bearer)){   //Here insert in header the variable or simple word
+        if(header == null || !header.startsWith(bearear)){   //Here insert in header the variable or simple word  e.g: Word +_token generate by POST method
             throw  new RuntimeException("JWT Token is missing");
 
         }
