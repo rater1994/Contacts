@@ -29,17 +29,17 @@ public class AccountControllerImpl  implements AccountController {
     }
 
     @Override
-    public AccountDto editAccount(@RequestBody AccountDto accountDto,@PathVariable Long id) {
+    public AccountDto editAccount(@RequestBody AccountDto accountDto,@PathVariable Integer id) {
         return accountService.editAccountDTO(accountDto,id);
     }
 
     @Override
-    public AccountDto findAccount(@PathVariable Long id){
+    public AccountDto findAccount(@PathVariable Integer id){
         return accountService.findAccountDTO(id);
     }
 
     @Override
-    public AccountDto deleteAccount(@PathVariable Long id) {
+    public AccountDto deleteAccount(@PathVariable Integer id) {
      return accountService.deleteAccountDTO(id);
     }
 

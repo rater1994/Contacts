@@ -18,9 +18,9 @@ public interface ContactsController {
     ContactDto addContact(@RequestBody ContactDto contactDto);
 
     @GetMapping("/get/{id}")
-    ContactDto getContact(@PathVariable Long id);
+    ContactDto getContact(@PathVariable Integer id);
 
     @PutMapping("/edit/{id}")
-    ContactDto editContact(@RequestBody ContactDto contactDto, @PathVariable Long id);
+    ContactDto editContact(@RequestBody ContactDto contactDto, @PathVariable Integer id);
 
 }

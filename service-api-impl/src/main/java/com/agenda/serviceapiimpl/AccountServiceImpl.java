@@ -47,7 +47,7 @@ public class AccountServiceImpl implements AccountService {
 
 
     @Override
-    public AccountDto editAccountDTO(AccountDto accountDto, Long id) {
+    public AccountDto editAccountDTO(AccountDto accountDto, Integer id) {
         Optional<Account> dbAccount = accountRepository.findById(id);
 
         if (dbAccount.isPresent()) {
@@ -66,7 +66,7 @@ public class AccountServiceImpl implements AccountService {
 
 
     @Override
-    public AccountDto findAccountDTO(Long id) {
+    public AccountDto findAccountDTO(Integer id) {
         Optional<Account> byId = accountRepository.findById(id);
 
         if (byId.isPresent()) {
@@ -77,7 +77,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountDto deleteAccountDTO(Long id)  {
+    public AccountDto deleteAccountDTO(Integer id)  {
         accountRepository.deleteById(id);
         return null;
     }

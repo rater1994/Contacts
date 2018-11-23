@@ -18,14 +18,10 @@ import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 @Table(name="users")
 public class Account {
 
-    @Transient
-    Logger log = Logger.getLogger(this.getClass().getName());
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
-    private Long id;
+    private Integer id;
 
     @Column
     private String username;
@@ -38,6 +34,17 @@ public class Account {
 
     @Column(name = "DeleteFlag")
     private String deleteFlag;
+
+    private String token;
+
+    public Account(){}
+
+    public Account(Account account) {
+        this.id = account.getId();
+        this.username = account.getUsername();
+        this.password = account.getPassword();
+        this.Role = account.getRole();
+    }
 
     public String getUsername() {
         return username;
@@ -69,6 +76,14 @@ public class Account {
 
     public void setDeleteFlag(String deleteFlag) {
         this.deleteFlag = deleteFlag;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     //    @Column
