@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtValidator {
 
-    private String secret = "youtube";
+    private String secret = "dENdtkgB7VMNGyanznMq9G4abtGMwan8WevvnshEyoHt5zp97hRkGVUNHAxKXTvOh97lzAutOm5SKtpb3w1sd2uF29W9v3CGgYyin";
 
     public Account validate(String token) {
 
@@ -23,11 +23,11 @@ public class JwtValidator {
             account = new Account();
 
             account.setUsername(body.getSubject());
-            account.setId((Integer) Integer.parseInt((String) body.get("id")));
-            account.setRole((String) body.get("Role"));
+            account.setUsername((String) body.get("Username"));
+            account.setPassword((String) body.get("Password"));
         }
         catch (Exception e){
-            System.out.println(e);
+            System.out.println("Error in JwtValidator : " + e);
         }
         return account;
     }

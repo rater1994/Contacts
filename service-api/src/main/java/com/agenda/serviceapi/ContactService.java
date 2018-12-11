@@ -18,4 +18,6 @@ public interface ContactService {
    ContactDto getContactDTO(@PathVariable Integer id);
 
    ContactDto editContactDTO(@RequestBody ContactDto contactDto, @PathVariable Integer id);
+
+
 }

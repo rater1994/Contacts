@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
-@RequestMapping("/account")
+    @RequestMapping("/account")
 public interface AccountController {
 
     @GetMapping ("/list")
@@ -25,6 +26,10 @@ public interface AccountController {
 
     @DeleteMapping("/delete/{id}")
     AccountDto deleteAccount(@PathVariable Integer id);
+
+
+
+
 }
 
 

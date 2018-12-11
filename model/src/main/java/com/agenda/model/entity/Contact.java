@@ -22,6 +22,9 @@ public class Contact {
     @Column(name = "Number_phone")
     private String numberPhone;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "account")
+    private Account account;
 
     public ContactDto toContactDto(){
         ContactDto contactDto = new ContactDto();

@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
@@ -19,6 +20,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EntityScan({"com.agenda.model.entity"})
 @Configuration
 @EnableSwagger2
+@EnableWebSecurity
 public class BootApplication {
 
     public static void main(String[] args) {

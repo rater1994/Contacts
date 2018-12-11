@@ -2,12 +2,18 @@ package security.controller;
 
 
 import com.agenda.model.entity.Account;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import jdk.nashorn.internal.objects.NativeJSON;
+import org.springframework.web.bind.annotation.*;
+import security.model.TokenResponse;
 import security.securityServer.JwtGenerator;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/token")
 public class TokenController {
@@ -16,12 +22,13 @@ public class TokenController {
 
     public TokenController(JwtGenerator jwtGenerator) {
         this.jwtGenerator = jwtGenerator;
-    }
 
+    }
 
     @PostMapping
-    public String generate(@RequestBody final Account account){
-        return jwtGenerator.generate(account);
+    public TokenResponse generate(@RequestBody final Account account){
+        TokenResponse tokenResponse = new TokenResponse();
+        tokenResponse.setToken(jwtGenerator.generate(account));
+        return tokenResponse;
     }
-
 }

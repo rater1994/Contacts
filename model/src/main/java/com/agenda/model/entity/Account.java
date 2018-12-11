@@ -8,6 +8,8 @@ import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
@@ -34,6 +36,9 @@ public class Account {
 
     @Column(name = "DeleteFlag")
     private String deleteFlag;
+
+    @OneToMany(mappedBy = "account")
+    private List<Contact> contacts = new ArrayList<>();
 
     private String token;
 
@@ -107,9 +112,6 @@ public class Account {
 //    public void setState(AccountState state) {
 //        this.state = state;
 //    }
-
-
-
 
     public AccountDto toAccountDto(){
         AccountDto accountDto = new AccountDto();

@@ -46,5 +46,4 @@ public class ContactControllerImpl implements ContactsController {
        return contactService.editContactDTO(contactDto, id);
     }
 
-
 }

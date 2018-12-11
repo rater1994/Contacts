@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/contact")
 public interface ContactsController {
@@ -22,5 +23,6 @@ public interface ContactsController {
 
     @PutMapping("/edit/{id}")
     ContactDto editContact(@RequestBody ContactDto contactDto, @PathVariable Integer id);
+
 
 }

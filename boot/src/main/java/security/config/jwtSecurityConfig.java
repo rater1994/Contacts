@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import security.securityServer.JwAuthenticationProvider;
 import security.securityServer.JwtAuthenticationEntryPoint;
 import security.securityServer.JwtAuthenticationTokenFilter;
@@ -43,16 +42,66 @@ public class jwtSecurityConfig  extends WebSecurityConfigurerAdapter {
         return filter;
     }
 
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http.csrf().disable()
+//                .authorizeRequests().antMatchers("/s/**").authenticated()
+//                .and()
+//                .exceptionHandling().authenticationEntryPoint(entryPoint)
+//                .and()
+//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//                http.addFilterBefore(authenticationTokenFilter(),UsernamePasswordAuthenticationFilter.class);
+//                http.headers().cacheControl();
+//
+//    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .authorizeRequests().antMatchers("**/rest/**").authenticated()
+                .authorizeRequests().antMatchers("**/token")
+                .authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(entryPoint)
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.addFilterBefore(authenticationTokenFilter(),UsernamePasswordAuthenticationFilter.class);
-        http.headers().cacheControl();
 
+        http.headers().cacheControl();
     }
+
+
+
+
+
+
+
+
+//        @Override
+//        protected void configure(HttpSecurity http) throws Exception {
+//            http
+//                    .authorizeRequests()
+//                    .antMatchers("/","/home").permitAll()
+//                    .antMatchers("/admin").hasRole("ADMIN")
+//                    .anyRequest().authenticated()
+//                    .and()
+//                    .formLogin()
+//                    .loginPage("/login")
+//                    .permitAll()
+//                    .and()
+//                    .logout()
+//                    .permitAll();
+//            http.exceptionHandling().accessDeniedPage("/403");
+//        }
+//
+//
+
+
+
+//    @Autowired
+//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//        auth
+//                .inMemoryAuthentication()
+//                .withUser("user").password("user").roles("USER")
+//                .and()
+//                .withUser("admin").password("admin").roles("ADMIN");
+//        }
 }
