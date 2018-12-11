@@ -2,17 +2,17 @@ package com.agenda.model.dto;
 
 public class AccountDto {
 
-    private Long id;
+    private Integer id;
     private String username;
     private String password;
     private String Role;
     private String deleteFlag;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

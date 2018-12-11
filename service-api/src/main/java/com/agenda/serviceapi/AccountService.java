@@ -15,9 +15,9 @@ public interface AccountService {
 
     AccountDto addAccountDTO(@RequestBody AccountDto accountDto);
 
-    AccountDto editAccountDTO(@RequestBody  AccountDto accountDto, @PathVariable Long id);
+    AccountDto editAccountDTO(@RequestBody  AccountDto accountDto, @PathVariable Integer id);
 
-    AccountDto findAccountDTO(@PathVariable Long id);
+    AccountDto findAccountDTO(@PathVariable Integer id);
 
-    AccountDto deleteAccountDTO(@PathVariable Long id);
+    AccountDto deleteAccountDTO(@PathVariable Integer id);
 }

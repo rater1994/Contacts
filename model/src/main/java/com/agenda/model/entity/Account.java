@@ -8,6 +8,8 @@ import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
@@ -18,14 +20,10 @@ import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 @Table(name="users")
 public class Account {
 
-    @Transient
-    Logger log = Logger.getLogger(this.getClass().getName());
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
-    private Long id;
+    private Integer id;
 
     @Column
     private String username;
@@ -38,6 +36,20 @@ public class Account {
 
     @Column(name = "DeleteFlag")
     private String deleteFlag;
+
+    @OneToMany(mappedBy = "account")
+    private List<Contact> contacts = new ArrayList<>();
+
+    private String token;
+
+    public Account(){}
+
+    public Account(Account account) {
+        this.id = account.getId();
+        this.username = account.getUsername();
+        this.password = account.getPassword();
+        this.Role = account.getRole();
+    }
 
     public String getUsername() {
         return username;
@@ -71,6 +83,14 @@ public class Account {
         this.deleteFlag = deleteFlag;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     //    @Column
 //    @Enumerated(EnumType.STRING)
 //    private AccountState state;
@@ -92,9 +112,6 @@ public class Account {
 //    public void setState(AccountState state) {
 //        this.state = state;
 //    }
-
-
-
 
     public AccountDto toAccountDto(){
         AccountDto accountDto = new AccountDto();

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,7 +36,7 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public ContactDto getContactDTO(Long id) {
+    public ContactDto getContactDTO(Integer id) {
         if(contactRepository.findById(id).isPresent()){
             return contactRepository.findById(id).get().toContactDto();
         }
@@ -43,7 +44,7 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public ContactDto editContactDTO(ContactDto contactDto, Long id) {
+    public ContactDto editContactDTO(ContactDto contactDto, Integer id) {
         Optional<Contact> dbContact = contactRepository.findById(id);
 
         if (dbContact.isPresent()) {
@@ -58,5 +59,7 @@ public class ContactServiceImpl implements ContactService {
             return null;
         }
     }
+
+
 
 }

@@ -15,7 +15,9 @@ public interface ContactService {
 
    ContactDto addNewContactDTO(@RequestBody ContactDto contactDto);
 
-   ContactDto getContactDTO(@PathVariable Long id);
+   ContactDto getContactDTO(@PathVariable Integer id);
 
-   ContactDto editContactDTO(@RequestBody ContactDto contactDto, @PathVariable Long id);
+   ContactDto editContactDTO(@RequestBody ContactDto contactDto, @PathVariable Integer id);
+
+
 }

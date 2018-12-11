@@ -11,7 +11,7 @@ public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
-    private Long id;
+    private Integer id;
 
     @Column(name = "First_Name")
     private String firstName;
@@ -22,6 +22,9 @@ public class Contact {
     @Column(name = "Number_phone")
     private String numberPhone;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "account")
+    private Account account;
 
     public ContactDto toContactDto(){
         ContactDto contactDto = new ContactDto();
@@ -41,11 +44,11 @@ public class Contact {
     }
 
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -37,14 +37,13 @@ public class ContactControllerImpl implements ContactsController {
     }
 
     @Override
-    public ContactDto getContact(@PathVariable Long id) {
+    public ContactDto getContact(@PathVariable Integer id) {
             return contactService.getContactDTO(id);
     }
 
     @Override
-    public ContactDto editContact(@RequestBody ContactDto contactDto,@PathVariable Long id) {
+    public ContactDto editContact(@RequestBody ContactDto contactDto,@PathVariable Integer id) {
        return contactService.editContactDTO(contactDto, id);
     }
-
 
 }
