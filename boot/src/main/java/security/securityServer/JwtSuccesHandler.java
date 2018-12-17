@@ -11,10 +11,8 @@ import java.io.IOException;
 public class JwtSuccesHandler implements AuthenticationSuccessHandler {
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
+    public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication)
+            throws IOException, ServletException {
         System.out.println("Succesfully Authentication");
-
     }
-
-
 }

@@ -9,6 +9,9 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
 import org.json.*;
+import sun.reflect.generics.parser.SignatureParser;
+
+import java.security.Signature;
 
 @Component
 public class JwtGenerator {
@@ -16,10 +19,6 @@ public class JwtGenerator {
     public String generate(Account account) {
 
         Account fields = new Account();
-//
-//        g.toJson(fields.setUsername());
-//
-
 
         Claims claims = Jwts.claims()
 

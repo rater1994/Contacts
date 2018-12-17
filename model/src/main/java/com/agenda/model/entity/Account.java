@@ -15,9 +15,9 @@ import java.util.logging.Logger;
 import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 
 @Entity
-@SQLDelete(sql = "UPDATE users SET delete_flag = 'DELETED' WHERE id = ?", check = ResultCheckStyle.COUNT)
-@Where(clause = "delete_flag <> 'DELETED'")
 @Table(name="users")
+@SQLDelete(sql = "UPDATE users SET delete_flag = 'DELETED' WHERE id = ?",check = ResultCheckStyle.COUNT)
+@Where(clause = "delete_flag <> 'DELETED'")
 public class Account {
 
     @Id

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.xml.ws.Response;
 import java.util.List;
 
 @Service
@@ -13,11 +14,13 @@ public interface AccountService {
 
     List<AccountDto> getAllAccountsDto();
 
-    AccountDto addAccountDTO(@RequestBody AccountDto accountDto);
+    ResponseEntity<String> addAccountDTO(@RequestBody AccountDto accountDto);
 
     AccountDto editAccountDTO(@RequestBody  AccountDto accountDto, @PathVariable Integer id);
 
     AccountDto findAccountDTO(@PathVariable Integer id);
 
-    AccountDto deleteAccountDTO(@PathVariable Integer id);
+    ResponseEntity<String> deleteAccountDTO(@PathVariable Integer id);
+
+    AccountDto loginDto(@PathVariable String username);
 }

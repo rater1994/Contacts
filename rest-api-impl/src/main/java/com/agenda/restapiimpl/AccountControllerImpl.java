@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.xml.ws.Response;
 import java.util.List;
-
 @RestController
 public class AccountControllerImpl  implements AccountController {
 
@@ -24,7 +23,7 @@ public class AccountControllerImpl  implements AccountController {
     }
 
     @Override
-    public AccountDto addAccount(@RequestBody AccountDto accountDto){
+    public ResponseEntity<String> addAccount(@RequestBody AccountDto accountDto){
         return accountService.addAccountDTO(accountDto);
     }
 
@@ -39,11 +38,12 @@ public class AccountControllerImpl  implements AccountController {
     }
 
     @Override
-    public AccountDto deleteAccount(@PathVariable Integer id) {
+    public ResponseEntity<String> deleteAccount(@PathVariable Integer id) {
      return accountService.deleteAccountDTO(id);
     }
 
-
-
-
+    @Override
+    public AccountDto login(@PathVariable String username) {
+        return accountService.loginDto(username);
+    }
 }

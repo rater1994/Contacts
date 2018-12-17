@@ -16,7 +16,7 @@ public interface AccountController {
     List<AccountDto> getAllAccounts();
 
     @PostMapping("/add")
-    AccountDto addAccount(@RequestBody AccountDto accountDto);
+    ResponseEntity<String> addAccount(@RequestBody AccountDto accountDto);
 
     @PutMapping("/edit/{id}")
     AccountDto editAccount(@RequestBody AccountDto accountDto, @PathVariable Integer id);
@@ -25,10 +25,10 @@ public interface AccountController {
     AccountDto findAccount(@PathVariable Integer id);
 
     @DeleteMapping("/delete/{id}")
-    AccountDto deleteAccount(@PathVariable Integer id);
+    ResponseEntity<String> deleteAccount(@PathVariable Integer id);
 
-
-
+    @GetMapping("/login/{username}/{id}")
+    AccountDto login(@PathVariable  String username);
 
 }
 
