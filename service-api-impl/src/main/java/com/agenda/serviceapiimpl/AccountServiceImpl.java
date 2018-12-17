@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.swing.text.html.Option;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -87,28 +88,21 @@ public class AccountServiceImpl implements AccountService {
         Optional<Account> byId = accountRepository.findById(id);
         if(byId.isPresent()) {
             accountRepository.deleteById( id );
-            return new ResponseEntity <>( "Account was succesfull deleted",HttpStatus.OK);
+            return new ResponseEntity <> ( "Account was succesfull deleted", HttpStatus.OK);
         } else {
-            return new ResponseEntity <>( "Account was not found", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity <> ( "Account was not found", HttpStatus.BAD_REQUEST);
         }
     }
 
     @Override
-    public AccountDto loginDto(String  username) {
-        Optional<Account> findByDetails = accountRepository.findByUsername(username);
+    public ResponseEntity<String> loginDto(String  username, String password) {
+        boolean findByIdDb = accountRepository.existsByUsername( username );
+        boolean findByPasswordDb  = accountRepository.existsByPassword( password );
 
-        System.out.println("User: " + username);
-
-        if(findByDetails.isPresent()){
-            accountRepository.findByUsername(username).get().toAccountDto();
-            System.out.println("login succesfull! by if!");
-
+        if (findByIdDb && findByPasswordDb) {
+            return new ResponseEntity <>( "Successful login",HttpStatus.OK);
         } else {
-            System.out.println("Credentials incorect!");
-
-            System.out.println("Username: " + accountRepository.findByUsername(username));
+            return new ResponseEntity <>( "Invalid credentials!",HttpStatus.BAD_REQUEST);
         }
-    return null;
     }
-
 }

@@ -22,5 +22,5 @@ public interface AccountService {
 
     ResponseEntity<String> deleteAccountDTO(@PathVariable Integer id);
 
-    AccountDto loginDto(@PathVariable String username);
+    ResponseEntity<String> loginDto(@PathVariable String username, @PathVariable String password);
 }

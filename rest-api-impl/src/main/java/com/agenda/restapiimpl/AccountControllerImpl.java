@@ -43,7 +43,7 @@ public class AccountControllerImpl  implements AccountController {
     }
 
     @Override
-    public AccountDto login(@PathVariable String username) {
-        return accountService.loginDto(username);
+    public ResponseEntity<String> login(@PathVariable String username, @PathVariable String password) {
+        return accountService.loginDto(username,password);
     }
 }

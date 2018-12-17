@@ -27,8 +27,8 @@ public interface AccountController {
     @DeleteMapping("/delete/{id}")
     ResponseEntity<String> deleteAccount(@PathVariable Integer id);
 
-    @GetMapping("/login/{username}/{id}")
-    AccountDto login(@PathVariable  String username);
+    @GetMapping("/login/{username}/{password}")
+    ResponseEntity <String> login(@PathVariable  String username, @PathVariable String password);
 
 }
 
