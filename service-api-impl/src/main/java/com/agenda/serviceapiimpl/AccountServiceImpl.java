@@ -8,10 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.swing.text.html.Option;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +22,7 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountService accountService;
 
+    String admin = "admin";
 
     @Override
     public List<AccountDto> getAllAccountsDto() {
@@ -39,18 +36,31 @@ public class AccountServiceImpl implements AccountService {
     public ResponseEntity<String> addAccountDTO(AccountDto accountDto) {
         Account account = new Account();
 
-        if (accountRepository.existsByUsername( accountDto.getUsername() )) {
-            return new ResponseEntity <>( "Username already exist!", HttpStatus.BAD_REQUEST );
+        String test = accountDto.getRole();
+
+
+
+        if(test == "admin" ) {
+//            accountDto.setRole( "USER" );
+            System.out.println("1");
         } else {
-            accountDto.setDeleteFlag( "ACTIVATED" );
-            accountDto.setRole( "USER" );
-            account.updateAccountDto( accountDto );
-            accountRepository.save( account ).toAccountDto();
-
-            return new ResponseEntity <>( "Account was created", HttpStatus.OK );
+            System.out.println("2");
         }
-    }
 
+
+//        if (accountRepository.existsByUsername( accountDto.getUsername() )) {
+//            return new ResponseEntity <> ( "Username already exist!", HttpStatus.BAD_REQUEST );
+//        } else {
+//            accountDto.setDeleteFlag( "ACTIVATED" );
+//
+//            System.out.println("The account role: " + accountDto.getRole());
+//            account.updateAccountDto( accountDto );
+//            accountRepository.save( account ).toAccountDto();
+//
+//            return new ResponseEntity <>( "Account was created", HttpStatus.OK );
+//        }
+        return new ResponseEntity <>( "Account was created", HttpStatus.OK );
+    }
 
     @Override
     public AccountDto editAccountDTO(AccountDto accountDto, Integer id) {
@@ -100,9 +110,9 @@ public class AccountServiceImpl implements AccountService {
         boolean findByPasswordDb  = accountRepository.existsByPassword( password );
 
         if (findByIdDb && findByPasswordDb) {
-            return new ResponseEntity <>( "Successful login",HttpStatus.OK);
+            return new ResponseEntity <>( "Successful login", HttpStatus.OK);
         } else {
-            return new ResponseEntity <>( "Invalid credentials!",HttpStatus.BAD_REQUEST);
+            return new ResponseEntity <>( "Invalid credentials!", HttpStatus.BAD_REQUEST);
         }
     }
 }

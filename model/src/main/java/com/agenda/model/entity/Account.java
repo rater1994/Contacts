@@ -32,7 +32,7 @@ public class Account {
     private String password;
 
     @Column(name = "Role")
-    private String Role;
+    private String role;
 
     @Column(name = "DeleteFlag")
     private String deleteFlag;
@@ -48,7 +48,7 @@ public class Account {
         this.id = account.getId();
         this.username = account.getUsername();
         this.password = account.getPassword();
-        this.Role = account.getRole();
+        this.role = account.getRole();
     }
 
     public String getUsername() {
@@ -67,13 +67,6 @@ public class Account {
         this.password = password;
     }
 
-    public String getRole() {
-        return Role;
-    }
-
-    public void setRole(String role) {
-        Role = role;
-    }
 
     public String getDeleteFlag() {
         return deleteFlag;
@@ -89,6 +82,14 @@ public class Account {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     //    @Column
@@ -119,7 +120,7 @@ public class Account {
         accountDto.setId(this.id);
         accountDto.setUsername(this.username);
         accountDto.setPassword(this.password);
-        accountDto.setRole(this.Role);
+        accountDto.setRole(this.role);
         accountDto.setDeleteFlag(this.deleteFlag);
         return accountDto;
     }
@@ -128,7 +129,7 @@ public class Account {
         this.id = accountDto.getId();
         this.username = accountDto.getUsername();
         this.password = accountDto.getPassword();
-        this.Role  = accountDto.getRole();
+        this.role  = accountDto.getRole();
         this.deleteFlag = accountDto.getDeleteFlag();
     }
 }
