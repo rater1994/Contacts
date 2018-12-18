@@ -22,7 +22,6 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountService accountService;
 
-    String admin = "admin";
 
     @Override
     public List<AccountDto> getAllAccountsDto() {
@@ -38,9 +37,7 @@ public class AccountServiceImpl implements AccountService {
 
         String test = accountDto.getRole();
 
-
-
-        if(test == "admin" ) {
+        if(test.equals( "admin" ) ) {
 //            accountDto.setRole( "USER" );
             System.out.println("1");
         } else {
