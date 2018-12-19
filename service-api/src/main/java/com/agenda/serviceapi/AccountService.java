@@ -16,7 +16,7 @@ public interface AccountService {
 
     ResponseEntity<String> addAccountDTO(@RequestBody AccountDto accountDto);
 
-    AccountDto editAccountDTO(@RequestBody  AccountDto accountDto, @PathVariable Integer id);
+    ResponseEntity<String> editAccountDTO(@RequestBody  AccountDto accountDto, @PathVariable Integer id);
 
     AccountDto findAccountDTO(@PathVariable Integer id);
 

@@ -19,7 +19,7 @@ public interface AccountController {
     ResponseEntity<String> addAccount(@RequestBody AccountDto accountDto);
 
     @PutMapping("/edit/{id}")
-    AccountDto editAccount(@RequestBody AccountDto accountDto, @PathVariable Integer id);
+    ResponseEntity<String> editAccount(@RequestBody AccountDto accountDto, @PathVariable Integer id);
 
     @GetMapping("/find/{id}")
     AccountDto findAccount(@PathVariable Integer id);

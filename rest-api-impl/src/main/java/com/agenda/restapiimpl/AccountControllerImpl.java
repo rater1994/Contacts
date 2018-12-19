@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.xml.ws.Response;
 import java.util.List;
 @RestController
 public class AccountControllerImpl  implements AccountController {
@@ -28,7 +27,7 @@ public class AccountControllerImpl  implements AccountController {
     }
 
     @Override
-    public AccountDto editAccount(@RequestBody AccountDto accountDto,@PathVariable Integer id) {
+    public ResponseEntity<String> editAccount(@RequestBody AccountDto accountDto,@PathVariable Integer id) {
         return accountService.editAccountDTO(accountDto,id);
     }
 
