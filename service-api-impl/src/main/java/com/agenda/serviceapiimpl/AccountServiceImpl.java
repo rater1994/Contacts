@@ -4,16 +4,12 @@ import com.agenda.model.dto.AccountDto;
 import com.agenda.model.entity.Account;
 import com.agenda.model.repository.AccountRepository;
 import com.agenda.serviceapi.AccountService;
-import org.apache.tomcat.util.bcel.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import javax.xml.ws.Response;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 
 @Service
@@ -61,38 +57,26 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public ResponseEntity<String> editAccountDTO(AccountDto accountDto, Integer id) {
         Optional<Account> dbAccount = accountRepository.findById(id);
-
         if (dbAccount.isPresent()) {
             Account account = dbAccount.get();
-
-            if(accountDto.getUsername().isEmpty()){
-               accountDto.setUsername( account.getUsername() );
-            }
-            account.setPassword(accountDto.getPassword());
-            account.setRole(accountDto.getRole());
-            account.setDeleteFlag(accountDto.getDeleteFlag());
-
+            account.setUsername( accountDto.getUsername() );
+            account.setPassword( accountDto.getPassword() );
+            account.setRole( accountDto.getRole() );
+            account.setDeleteFlag( accountDto.getDeleteFlag() );
             accountRepository.save(account).toAccountDto();
             return new ResponseEntity <>( "The account was edited!",HttpStatus.OK);
         }
-
-        return new ResponseEntity <>( "Something wrong",HttpStatus.BAD_REQUEST);
+        return new ResponseEntity <>( "The user not found",HttpStatus.BAD_REQUEST);
     }
-
-
-
 
     @Override
     public AccountDto findAccountDTO(Integer id) {
-        Optional<Account> byId = accountRepository.findById(id);
+        Optional <Account> byId = accountRepository.findById( id );
 
         if (byId.isPresent()) {
-            System.out.println("Search...." + id);
-            return accountRepository.findById(id).get().toAccountDto();
-
-        } else {
-            return null;
+            return accountRepository.findById( id ).get().toAccountDto();
         }
+        return null;
     }
 
     @Override
