@@ -15,14 +15,14 @@ import java.util.logging.Logger;
 import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 
 @Entity
-@Table(name="users")
-@SQLDelete(sql = "UPDATE users SET delete_flag = 'DELETED' WHERE id = ?",check = ResultCheckStyle.COUNT)
+@Table(name = "users")
+@SQLDelete(sql = "UPDATE users SET delete_flag = 'DELETED' WHERE id = ?", check = ResultCheckStyle.COUNT)
 @Where(clause = "delete_flag <> 'DELETED'")
 public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id")
+    @Column(name = "id")
     private Integer id;
 
     @Column
@@ -37,18 +37,40 @@ public class Account {
     @Column(name = "DeleteFlag")
     private String deleteFlag;
 
-    @OneToMany(mappedBy = "account")
-    private List<Contact> contacts = new ArrayList<>();
+    @Column(name = "Email")
+    private String email;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List <Contact> contacts;
 
     private String token;
 
-    public Account(){}
+    public Account() {
+    }
 
     public Account(Account account) {
         this.id = account.getId();
         this.username = account.getUsername();
         this.password = account.getPassword();
         this.role = account.getRole();
+    }
+
+
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public List <Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(List <Contact> contacts) {
+        this.contacts = contacts;
     }
 
     public String getUsername() {
@@ -92,44 +114,24 @@ public class Account {
         this.role = role;
     }
 
-    //    @Column
-//    @Enumerated(EnumType.STRING)
-//    private AccountState state;
-
-
-
-//    @PreRemove
-//    public void deleteUser(){
-//        log.info("Set state to DELETED");
-//        this.state = AccountState.DELETED;
-//    }
-
-
-//
-//    public AccountState getState() {
-//        return state;
-//    }
-//
-//    public void setState(AccountState state) {
-//        this.state = state;
-//    }
-
-    public AccountDto toAccountDto(){
+    public AccountDto toAccountDto() {
         AccountDto accountDto = new AccountDto();
 
-        accountDto.setId(this.id);
-        accountDto.setUsername(this.username);
-        accountDto.setPassword(this.password);
-        accountDto.setRole(this.role);
-        accountDto.setDeleteFlag(this.deleteFlag);
+        accountDto.setId( this.id );
+        accountDto.setUsername( this.username );
+        accountDto.setPassword( this.password );
+        accountDto.setRole( this.role );
+        accountDto.setEmail( this.email );
+        accountDto.setDeleteFlag( this.deleteFlag );
         return accountDto;
     }
 
-    public void updateAccountDto(AccountDto accountDto){
+    public void updateAccountDto(AccountDto accountDto) {
         this.id = accountDto.getId();
         this.username = accountDto.getUsername();
         this.password = accountDto.getPassword();
-        this.role  = accountDto.getRole();
+        this.role = accountDto.getRole();
+        this.email = accountDto.getEmail();
         this.deleteFlag = accountDto.getDeleteFlag();
     }
 }

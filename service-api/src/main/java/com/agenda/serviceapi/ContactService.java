@@ -19,4 +19,6 @@ public interface ContactService {
 
    ContactDto editContactDTO(@RequestBody ContactDto contactDto, @PathVariable Integer id);
 
+   List<ContactDto> getAllContactsDTO(@PathVariable Integer id);
+
 }

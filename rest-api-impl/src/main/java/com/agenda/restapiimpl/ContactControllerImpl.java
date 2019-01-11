@@ -22,28 +22,34 @@ public class ContactControllerImpl implements ContactsController {
     private ContactService contactService;
 
     public ContactControllerImpl(ContactRepository contactRepository, ContactService contactService) {
-    this.contactRepository = contactRepository;
-    this.contactService = contactService;
+        this.contactRepository = contactRepository;
+        this.contactService = contactService;
     }
 
     @Override
-    public List<ContactDto> getContacts() {
+    public List <ContactDto> getContacts() {
         return contactService.getAllContactDTO();
     }
 
     @Override
     public ContactDto addContact(@RequestBody ContactDto contactDto) {
-        return contactService.addNewContactDTO(contactDto);
+        return contactService.addNewContactDTO( contactDto );
     }
 
     @Override
     public ContactDto getContact(@PathVariable Integer id) {
-            return contactService.getContactDTO(id);
+        return contactService.getContactDTO( id );
     }
 
     @Override
-    public ContactDto editContact(@RequestBody ContactDto contactDto,@PathVariable Integer id) {
-       return contactService.editContactDTO(contactDto, id);
+    public ContactDto editContact(@RequestBody ContactDto contactDto, @PathVariable Integer id) {
+        return contactService.editContactDTO( contactDto, id );
     }
+
+    @Override
+    public List <ContactDto> getAllContacts(Integer id) {
+        return contactService.getAllContactsDTO( id );
+    }
+
 
 }

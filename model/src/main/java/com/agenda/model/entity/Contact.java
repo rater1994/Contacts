@@ -23,7 +23,6 @@ public class Contact {
     private String numberPhone;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "account")
     private Account account;
 
     public ContactDto toContactDto(){
@@ -43,6 +42,14 @@ public class Contact {
         this.numberPhone = contactDto.getNumberPhoneDto();
     }
 
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 
     public Integer getId() {
         return id;

@@ -5,6 +5,7 @@ public class ContactDto {
     private String firstNameDto;
     private String lastNameDto;
     private String numberPhoneDto;
+    private int accountId;
 
     public Integer getId() {
         return id;
@@ -39,4 +40,11 @@ public class ContactDto {
     }
 
 
+    public int getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
+    }
 }

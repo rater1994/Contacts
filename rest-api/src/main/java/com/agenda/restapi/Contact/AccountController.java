@@ -9,7 +9,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
-    @RequestMapping("/account")
+@RequestMapping("/account")
 public interface AccountController {
 
     @GetMapping ("/list")

@@ -24,5 +24,7 @@ public interface ContactsController {
     @PutMapping("/edit/{id}")
     ContactDto editContact(@RequestBody ContactDto contactDto, @PathVariable Integer id);
 
+    @GetMapping("/all/{id}")
+    List<ContactDto> getAllContacts(@PathVariable Integer id);
 
 }

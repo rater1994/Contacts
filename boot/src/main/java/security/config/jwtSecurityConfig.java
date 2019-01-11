@@ -57,8 +57,7 @@ public class jwtSecurityConfig  extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
+        http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/account").permitAll()
                 .antMatchers("/login/**").permitAll()
@@ -71,11 +70,6 @@ public class jwtSecurityConfig  extends WebSecurityConfigurerAdapter {
 
         http.headers().cacheControl();
     }
-
-
-
-
-
 
 
 
