@@ -123,6 +123,11 @@ public class Account {
         accountDto.setRole( this.role );
         accountDto.setEmail( this.email );
         accountDto.setDeleteFlag( this.deleteFlag );
+
+
+        accountDto.setContactDtos( new ArrayList <>() );
+        this.contacts.forEach( contact -> accountDto.getContactDtos().add( contact.toContactDto() ) );
+
         return accountDto;
     }
 

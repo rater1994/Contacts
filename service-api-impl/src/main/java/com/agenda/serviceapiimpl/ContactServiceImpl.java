@@ -34,9 +34,10 @@ public class ContactServiceImpl implements ContactService {
     @Override
     public ContactDto addNewContactDTO(ContactDto contactDto) {
         Contact contact = new Contact();
-
+        contactDto.setAccountId( 6 );
         contact.updateContactDto( contactDto );
         Account account = accountRepository.findById( contactDto. getAccountId());
+
         contact.setAccount( account );
         account.getContacts().add( contact );
         return contactRepository.save( contact ).toContactDto();
